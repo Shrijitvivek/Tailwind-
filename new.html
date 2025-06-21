@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sticky Scroll Navbar</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="m-0 p-0">
+
+  <!-- SECTION: Background Image with initial transparent navbar over it -->
+  <header class="relative h-[100vh] bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e');">
+    
+    <!-- Sticky Navbar -->
+    <nav class="sticky top-0 z-50 backdrop-blur-md transition-all duration-300">
+      <div class="bg-white/0 text-white px-6 py-4 transition-all duration-300 sticky-nav">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+          <div class="font-bold text-xl">Logo</div>
+          <div class="space-x-4">
+            <a href="#" class="hover:underline">Home</a>
+            <a href="#" class="hover:underline">About</a>
+            <a href="#" class="hover:underline">Contact</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Text -->
+    <div class="absolute inset-0 flex items-center justify-center">
+      <h1 class="text-5xl font-bold text-white">Welcome</h1>
+    </div>
+  </header>
+
+  <!-- Dummy trigger element to activate the scroll effect -->
+  <div class="h-[2px]"></div>
+
+  <!-- SECTION: Content below triggers navbar change -->
+  <main class="bg-white">
+    <style>
+      /* CSS-only scroll effect using backdrop and changing colors */
+      .sticky-nav {
+        position: sticky;
+        top: 0;
+        backdrop-filter: blur(10px);
+        background-color: rgba(255, 255, 255, 0);
+        color: white;
+        transition: background-color 0.3s, color 0.3s;
+      }
+      .sticky-nav::after {
+        content: "";
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: transparent;
+      }
+
+      /* Scroll-based effect using intersection observer trick */
+      body:has(.h-\[2px\]:not(:visible)) .sticky-nav {
+        background-color: rgba(255, 255, 255, 1);
+        color: black;
+      }
+    </style>
+
+    <!-- Content to scroll into -->
+    <section class="h-[200vh] p-10">
+      <p class="text-2xl">Scroll down a little and see the navbar change from transparent to white background.</p>
+    </section>
+  </main>
+
+</body>
+</html>
